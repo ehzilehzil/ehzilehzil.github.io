@@ -1,0 +1,14 @@
+{
+    "nodeModulesDir": "manual",
+    "imports": {
+        "@types/fs-extra": "npm:@types/fs-extra@^11.0.4",
+        "@types/js-yaml": "npm:@types/js-yaml@^4.0.9",
+        "@types/markdown-it": "npm:@types/markdown-it@^14.1.2",
+        "@types/markdown-it-container": "npm:@types/markdown-it-container@^2.0.10",
+        "fs-extra": "npm:fs-extra@^11.3.0",
+        "highlight.js": "npm:highlight.js@^11.11.1",
+        "js-yaml": "npm:js-yaml@^4.1.0",
+        "markdown-it": "npm:markdown-it@^14.1.0",
+        "markdown-it-container": "npm:markdown-it-container@^4.0.0"
+    }
+}
