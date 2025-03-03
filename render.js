@@ -42,7 +42,7 @@ const md = markdownIt({
 });
 
 const separate = (str) => {
-    let m = str.match(/^---\s*?\n([\s\S]*?)\n---\s*?\n/);
+    let m = str.match(/^---\s*?\n([\S\s]*?)---\s*?\n/);
 
     if (m) {
         return {
