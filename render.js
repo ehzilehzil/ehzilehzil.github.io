@@ -2,6 +2,7 @@ import markdownIt from "markdown-it";
 import custom_plugin from "markdown-it-container";
 import hljs from "highlight.js";
 import yaml from "js-yaml";
+import pug from "pug";
 
 const md = markdownIt({
     xhtmlOut: true,
@@ -60,6 +61,7 @@ const render = {
     md: (str) => md.render(str),
     yaml: (str) => yaml.load(str),
     separate: (str) => separate(str),
+    pug: (str, obj) => pug.render(str, obj),
 };
 
 export default render;

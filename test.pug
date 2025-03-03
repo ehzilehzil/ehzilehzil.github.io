@@ -1,18 +1,4 @@
----
-site:
-    title: "어질어질 블로그"
-
-page:
-    dirs:
-        - title: "테스트"
-          permalink: "#test"
-        - title: "My Diary"
-          permalink: "#diary"
-        - title: "잡동사니"
-          permalink: "#miscellaneous"
----
-
-doctype html
+<!DOCTYPE html>
 html(lang="ko", data-theme="light")
     head
         meta(charset="utf-8")
@@ -34,7 +20,6 @@ html(lang="ko", data-theme="light")
                             a(href=dir.permalink) #{ dir.title }
             hr
             main.section
-                // content goes here
             hr
             footer.section
         script(src="./global.js")
