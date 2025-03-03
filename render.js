@@ -4,7 +4,7 @@ import hljs from "highlight.js";
 import yaml from "js-yaml";
 
 const md = markdownIt({
-    xhtmlOut: false,
+    xhtmlOut: true,
     highlight: (str, lang) => {
         let language = lang.match(/(\w+)/)?.[1];
         language = language && hljs.getLanguage(language) ? language : "plaintext";
