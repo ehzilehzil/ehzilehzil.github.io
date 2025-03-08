@@ -2,7 +2,11 @@ import markdownIt from "markdown-it";
 import custom_plugin from "markdown-it-container";
 import hljs from "highlight.js";
 import yaml from "js-yaml";
-import pug from "pug";
+import { Liquid } from 'liquidjs';
+
+const engine = new Liquid();
+engine.registerFilter("removeLabel", (x) => x.replace(/^\[[\s\S]+?\]/, ""));
+engine.registerFilter("today", (_) => new Date().toISOString().split("T")[0]);
 
 const md = markdownIt({
     xhtmlOut: true,
@@ -61,7 +65,8 @@ const render = {
     md: (str) => md.render(str),
     yaml: (str) => yaml.load(str),
     separate: (str) => separate(str),
-    pug: (str, obj) => pug.render(str, obj),
+    // pug: (str, obj) => pug.render(str, obj),
+    liquid: (str, obj) => engine.parseAndRenderSync(str, obj),
 };
 
 export default render;

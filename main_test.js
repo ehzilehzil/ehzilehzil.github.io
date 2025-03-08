@@ -3,20 +3,12 @@ import fg from "fast-glob";
 import render from "./render.js";
 import path from "node:path";
 
-let vars = {
 
-};
+let a = `
+<h1>{{ test }}</h1>
+`;
 
-let {frontmatter, content} = render.separate(fs.readFileSync(`./_markdown/page/[0010]index.md`, "utf-8"));
-Object.assign(vars, render.yaml(frontmatter));
-Object.assign(vars, {content: render.md(content)});
+a = render.liquid(a, {test1: "Hello World!"});
 
-({frontmatter, content} = render.separate(fs.readFileSync(`./_layout/page.pug`, "utf-8")));
-Object.assign(vars, render.yaml(frontmatter));
-
-
-// content = render.pug(a, vars);
-content = render.pug(content, vars);
-
-console.log(content);
+console.log(a);
 
