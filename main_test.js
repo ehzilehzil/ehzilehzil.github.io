@@ -2,13 +2,35 @@ import fs from "fs-extra";
 import fg from "fast-glob";
 import render from "./render.js";
 import path from "node:path";
+import { version } from "node:os";
 
 
-let a = `
-<h1>{{ test }}</h1>
-`;
+const renderPage = (vars, mdfile) => {
+    // parse markdown
+    let {frontmatter, content} = render.separate(fs.readFileSync(mdfile, "utf-8"));
+    frontmatter = render.liquid(frontmatter, vars);
+    Object.assign(vars, render.yaml(frontmatter));
+    content = render.md(content);
 
-a = render.liquid(a, {test1: "Hello World!"});
+    // parse liquidjs
+    while (vars.layout) {
+        let liquidfile = `./_layout/${vars.layout}.layout`;
+        delete vars.layout;
+        let {frontmatter, content} = render.separate(fs.readFileSync(liquidfile, "utf-8"));
+        frontmatter = render.liquid(frontmatter, vars);
+        Object.assign(vars, render.yaml(frontmatter));
+        content = render.liquid(content, vars);
+        Object.assign(vars, {content});
+    }
 
-console.log(a);
+    // write json
+    fs.outputJSONSync(`./_site/${vars.permalink === "/" ? "/page/index" : vars.permalink}.json`, {content: vars.content}, {encoding="utf-8"});
 
+    // return parse info
+    return {permalink: vars.permalink, title: vars.title, dir: vars.dir};
+}
+
+let vars = {
+    layout: "page",
+    permalink: "{{ name | removeLavel }}"
+};
