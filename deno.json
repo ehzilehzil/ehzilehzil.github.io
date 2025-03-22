@@ -13,6 +13,7 @@
         "markdown-it": "npm:markdown-it@^14.1.0",
         "markdown-it-container": "npm:markdown-it-container@^4.0.0",
         "pug": "npm:pug@^3.0.3",
+        "sass": "npm:sass@^1.86.0"
     },
     "lint": {
         "rules": {

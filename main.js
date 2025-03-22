@@ -8,6 +8,7 @@
 import fs from "fs-extra";
 import fg from "fast-glob";
 import {minify} from "html-minifier";
+import sass from "sass";
 import path from "node:path";
 import render from "./render.js";
 
@@ -198,4 +199,19 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
     renderPage(``, vars);
 
     console.log(`index.html, 404.html, sitemap.xml 렌더링 완료`);
+}
+
+
+/**
+ * scss 를 css 로 변환, ./_asset 복사
+ */
+{
+    console.log(`./_asset 폴더 파일들 복사 시작`);
+
+    let css = sass.compile(`./_asset/global.scss`, {style: `compressed`}).css
+    fs.outputFileSync(`./_site/global.css`, css, {encoding: `utf-8`});
+
+    fs.copySync(`./_asset`, `./_site`, {filter: (x) => !x.endsWith(`.scss`)});
+
+    console.log(`./_asset 폴더 파일들 복사 완료`);
 }
