@@ -42,28 +42,25 @@ let pages = {};
  */
 const renderPage = (srcFile, vars) => {
     // vars defaults
-    vars.permalink ??= `/page/{{ name | removeLabel }}`;
-    vars.path ??= `./page/{{ name | removeLabel }}.json`;
-    vars.title ??= `{{ name | removeLabel }}`;
-
-    // parse vars itself
-    Object.assign(vars, JSON.parse(render.liquid(JSON.stringify(vars), vars)));
+    vars.permalink ??= `/page/${srcFile}`;
+    vars.path ??= `./page/${srcFile}.json`;
+    vars.title ??= srcFile;
 
     // parse markdown
     if (srcFile.endsWith(`.md`)) {
         let {frontmatter, content} = render.separate(fs.readFileSync(srcFile, `utf-8`));
-        Object.assign(vars, render.yaml(render.liquid(frontmatter, vars)));
+        Object.assign(vars, render.yaml(frontmatter));
         content = render.md(content);
         Object.assign(vars, {content});
     }
 
-    // parse liquidjs template
+    // parse pugjs template
     while (vars.layout) {
-        let liquidFile = `./_layout/${vars.layout}.liquid`;
+        let pugFile = `./_layout/${vars.layout}.pug`;
         delete vars.layout;
-        let {frontmatter, content} = render.separate(fs.readFileSync(liquidFile, `utf-8`));
-        Object.assign(vars, render.yaml(render.liquid(frontmatter, vars)));
-        content = render.liquid(content, vars);
+        let {frontmatter, content} = render.separate(fs.readFileSync(pugFile, `utf-8`));
+        Object.assign(vars, render.yaml(frontmatter));
+        content = render.pug(content, vars);
         Object.assign(vars, {content});
     }
 
@@ -94,11 +91,14 @@ const renderPage = (srcFile, vars) => {
     let mdFiles = fg.globSync(`./_markdown/page/**/*.md`);
     for (let [i, mdf] of mdFiles.entries()) {
         let {dir, name} = path.parse(mdf);
+        dir = dir.replace(`./_markdown/page`, ``).replace(/^\//, ``).replace(/^$/, `/`);
+        name = name.replace(/^\[[\s\S]*?\]/, ``);
+
         let vars = {
             ...globals,
-            permalink: `/page/{{ name | removeLabel }}`,
-            path: `./page/{{ name | removeLabel }}.json`,
-            dir: dir.replace(`./_markdown/page`, ``).replace(/^\//, ``).replace(/^$/, `/`),
+            permalink: `/page/${name}`,
+            path: `./page/${name}.json`,
+            dir,
             name,
         };
         try {
@@ -135,12 +135,14 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
     let mdFiles = fg.globSync(`./_markdown/dir/**/*.md`);
     for (let [i, mdf] of mdFiles.entries()) {
         let {name} = path.parse(mdf);
+        let dir = `__DIRECTORY__`;
+        name = name.replace(/^\[[\s\S]*?\]/, ``);
+
         let vars = {
             ...globals,
-            permalink: `/dir/{{ name | removeLabel }}`,
-            path: `./dir/{{ name | removeLabel }}.json`,
-            dir: `__DIRECTORY__`,
-            tardir: `{{ name | removeLabel }}`,
+            permalink: `/dir/${name}`,
+            path: `./dir/${name}.json`,
+            dir,
             name,
             dirs,
         };
@@ -154,6 +156,17 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
     }
     
     console.log(`${mdFiles.length}개 페이지 렌더링 완료`);
+}
+
+
+/**
+ * dir 객체에 __DIRECTORY__ 추가
+ */
+for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)) {
+    if (dir !== `__DIRECTORY__`) continue;
+    
+    if (!dirs[dir]) dirs[dir] = [];
+    dirs[dir].push({path, title, permalink, updated, tags})
 }
 
 

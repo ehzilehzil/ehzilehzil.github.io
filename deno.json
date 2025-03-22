@@ -10,9 +10,9 @@
         "highlight.js": "npm:highlight.js@^11.11.1",
         "html-minifier": "npm:html-minifier@^4.0.0",
         "js-yaml": "npm:js-yaml@^4.1.0",
-        "liquidjs": "npm:liquidjs@^10.21.0",
         "markdown-it": "npm:markdown-it@^14.1.0",
         "markdown-it-container": "npm:markdown-it-container@^4.0.0",
+        "pug": "npm:pug@^3.0.3",
     },
     "lint": {
         "rules": {
