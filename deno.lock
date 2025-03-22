@@ -5,6 +5,7 @@
     "npm:@types/js-yaml@^4.0.9": "4.0.9",
     "npm:@types/markdown-it-container@^2.0.10": "2.0.10",
     "npm:@types/markdown-it@^14.1.2": "14.1.2",
+    "npm:@types/pug@^2.0.10": "2.0.10",
     "npm:fast-glob@^3.3.3": "3.3.3",
     "npm:fs-extra@^11.3.0": "11.3.0",
     "npm:highlight.js@^11.11.1": "11.11.1",
@@ -71,6 +72,9 @@
       "dependencies": [
         "undici-types"
       ]
+    },
+    "@types/pug@2.0.10": {
+      "integrity": "sha512-Sk/uYFOBAB7mb74XcpizmH0KOR2Pv3D2Hmrh1Dmy5BmK3MpdSa5kqZcg6EKBdklU0bFXX9gCfzvpnyUehrPIuA=="
     },
     "argparse@2.0.1": {
       "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
@@ -233,6 +237,7 @@
       "npm:@types/js-yaml@^4.0.9",
       "npm:@types/markdown-it-container@^2.0.10",
       "npm:@types/markdown-it@^14.1.2",
+      "npm:@types/pug@^2.0.10",
       "npm:fast-glob@^3.3.3",
       "npm:fs-extra@^11.3.0",
       "npm:highlight.js@^11.11.1",

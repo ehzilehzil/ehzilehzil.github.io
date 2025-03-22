@@ -4,6 +4,7 @@ title: "About 어질어질 블로그"
 description: "블로그 대문, 주인장 및 블로그 소개 페이지"
 updated: "2025-03-03"
 tags: ["ehzilehzil.github.io","frontpage","about"]
+permalink: "/"
 ---
 
 ## About Me

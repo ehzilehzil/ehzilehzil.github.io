@@ -2,7 +2,7 @@ import markdownIt from "markdown-it";
 import custom_plugin from "markdown-it-container";
 import hljs from "highlight.js";
 import yaml from "js-yaml";
-import { Liquid } from 'liquidjs';
+import { Liquid } from "liquidjs";
 
 const engine = new Liquid();
 engine.registerFilter("removeLabel", (x) => x.replace(/^\[[\s\S]+?\]/, ""));
