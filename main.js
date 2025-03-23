@@ -8,7 +8,7 @@
 import fs from "fs-extra";
 import fg from "fast-glob";
 import {minify} from "html-minifier";
-import sass from "sass";
+import * as sass from "sass";
 import path from "node:path";
 import render from "./render.js";
 
@@ -44,7 +44,7 @@ let pages = {};
 const renderPage = (srcFile, vars) => {
     // vars defaults
     vars.permalink ??= `/page/${srcFile}`;
-    vars.path ??= `./page/${srcFile}.json`;
+    vars.path ??= `/page/${srcFile}.json`;
     vars.title ??= srcFile;
 
     // parse markdown
@@ -73,9 +73,9 @@ const renderPage = (srcFile, vars) => {
     });
 
     if (srcFile.endsWith(`.md`)) {
-        fs.outputJSONSync(vars.path.replace(`./`, `./_site/`), {content: vars.content}, {encoding: `utf-8`});
+        fs.outputJSONSync(vars.path.replace(`/`, `./_site/`), {content: vars.content}, {encoding: `utf-8`});
     } else {
-        fs.outputFileSync(vars.path.replace(`./`, `./_site/`), vars.content, {encoding: `utf-8`});
+        fs.outputFileSync(vars.path.replace(`/`, `./_site/`), vars.content, {encoding: `utf-8`});
     }
     // console.log(vars.content);
 
@@ -98,7 +98,7 @@ const renderPage = (srcFile, vars) => {
         let vars = {
             ...globals,
             permalink: `/page/${name}`,
-            path: `./page/${name}.json`,
+            path: `/page/${name}.json`,
             dir,
             name,
         };
@@ -142,7 +142,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
         let vars = {
             ...globals,
             permalink: `/dir/${name}`,
-            path: `./dir/${name}.json`,
+            path: `/dir/${name}.json`,
             dir,
             name,
             dirs,
@@ -181,7 +181,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
         ...globals,
         layout: `base`,
         dirs,
-        path: `./index.html`,
+        path: `/index.html`,
         name: ``,
     };
 
@@ -192,7 +192,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
         ...globals,
         layout: `sitemap`,
         dirs,
-        path: `./sitemap.xml`,
+        path: `/sitemap.xml`,
         name: ``,
     };
 
@@ -203,7 +203,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
 
 
 /**
- * scss 를 css 로 변환, ./_asset 복사
+ * scss 를 css 로 변환, ./_asset 복사, pages 저장
  */
 {
     console.log(`./_asset 폴더 파일들 복사 시작`);
@@ -212,6 +212,8 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
     fs.outputFileSync(`./_site/global.css`, css, {encoding: `utf-8`});
 
     fs.copySync(`./_asset`, `./_site`, {filter: (x) => !x.endsWith(`.scss`)});
+
+    fs.outputJSONSync(`./_site/pages.json`, pages, {encoding: `utf-8`});
 
     console.log(`./_asset 폴더 파일들 복사 완료`);
 }

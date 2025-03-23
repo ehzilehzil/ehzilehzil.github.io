@@ -11,6 +11,6 @@ ul.page-links
         - pages = pages.reverse()
     each page in pages
         li.page-link
-            a(href=page.permalink) #{ page.title }
-            span.page-link-updated Last updated: #{ page.updated },
+            a(href=page.permalink) #{ page.title } 
+            span.page-link-updated Last updated: #{ page.updated }, 
             span.page-link-tags Tags: #{ page.tags.join(", ") }
