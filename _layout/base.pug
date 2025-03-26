@@ -11,22 +11,27 @@ html(lang="ko", data-theme="light", class="preload")
         link(rel="stylesheet", href="/global.css")
     body
         .layout
-            header.section
-                .leftside
-                    h1.site-title #{ site.title }
-                .rightside
-                    button.toggle-theme
-                        span.material-symbols-light--sunny-outline
-                        span.material-symbols-light--nights-stay-outline
+            .section
+                header
+                    .leftside
+                        h1.site-title #{ site.title }
+                    .rightside
+                        button.toggle-theme
+                            div.toggle-theme-back
+                                span.material-symbols-light--sunny-outline
+                                span.material-symbols-light--nights-stay-outline
             hr
-            nav.section
-                ul
-                    each page in dirs["__DIRECTORY__"]
-                        li
-                            a(href=page.permalink) #{ page.title }
+            .section
+                nav
+                    ul
+                        each page in dirs["__DIRECTORY__"]
+                            li
+                                a(href=page.permalink) #{ page.title }
             hr
-            main.section
-                // content goes here
+            .section
+                main
+                    // content goes here
             hr
-            footer.section
+            .section
+                footer
         script(src="/global.js", type="module")

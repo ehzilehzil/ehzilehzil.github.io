@@ -3,8 +3,10 @@
 
 h1.page-title #{ title }
 .page-meta.page-description #{ description }
-.page-meta.page-updated #{ updated }
+.page-meta.page-updated Last updated: #{ updated }
 | !{ content }
-ul.page-meta.page-tags
-    each tag in tags
-        li #{ tag }
+div.page-meta.page-tags
+    | Tags:
+    ul
+        each tag in tags
+            li #{ tag }
