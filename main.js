@@ -143,6 +143,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
             ...globals,
             permalink: `/dir/${name}`,
             path: `/dir/${name}.json`,
+            updated: new Date().toISOString().split(`T`)[0],
             dir,
             name,
             dirs,

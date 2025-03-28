@@ -24,6 +24,8 @@ html(lang="ko", data-theme="light", class="preload")
             .section
                 nav
                     ul
+                        li
+                            a(href="/") Home
                         each page in dirs["__DIRECTORY__"]
                             li
                                 a(href=page.permalink) #{ page.title }
@@ -34,4 +36,14 @@ html(lang="ko", data-theme="light", class="preload")
             hr
             .section
                 footer
+                    .footer-msg
+                        div Designed by EHZIL,
+                        div
+                            | Built with
+                            span.deno
+                            | Deno,
+                        div
+                            | Powered by
+                            span.github
+                            | Github.
         script(src="/global.js", type="module")
