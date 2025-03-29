@@ -1,0 +1,17 @@
+---
+---
+
+<h1 class="page-title">{{ title }}</h1>
+<div class="page-meta page-description">{{ description }}</div>
+<div class="page-meta page-updated">{{ updated }}</div>
+<ul class="page-links">
+    {% assign pages = dir[name] %}
+    {% if order == "desc" %}{% assign pages = pages | reverse %}{% endif %}
+    {% for page in pages %}
+        <li class="page-link">
+            <a href="{{ page.permalink }}">{{ page.title }}</a>
+            <span class="page-link-updated">Last Updated: {{ page.updated }}</span>, 
+            <span class="page-link-tags">Tags: {{  }}
+        </li>
+    {% endfor %}
+</ul>

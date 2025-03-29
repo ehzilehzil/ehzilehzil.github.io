@@ -6,7 +6,7 @@ h1.page-title #{ title }
 .page-meta.page-updated Last updated: #{ updated }
 | !{ content }
 div.page-meta.page-tags
-    | Tags:&nbsp;
     ul
+        li Tags:
         each tag in tags
-            li #{ tag }
+            li.tag #{ tag }

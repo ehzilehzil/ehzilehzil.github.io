@@ -2,26 +2,25 @@
 ---
 
 doctype html
-html(lang="ko", data-theme="light", class="preload")
+html(lang="ko" data-theme="light" class="preload")
     head
         meta(charset="utf-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
         meta(http-equiv="X-UA-Compatible" content="IE=edge")
         title #{ site.title }
-        link(rel="stylesheet", href="/global.css")
+        link(rel="stylesheet" href="/global.css")
     body
         .layout
-            .section
+            .header-wrapper.section
                 header
-                    .leftside
+                    .left-side
                         h1.site-title #{ site.title }
-                    .rightside
-                        button.toggle-theme
-                            div.toggle-theme-back
-                                span.material-symbols-light--sunny-outline
-                                span.material-symbols-light--nights-stay-outline
-            hr
-            .section
+                    .right-side
+                        .toggle-theme
+                            .toggle-theme-bg
+                                .icon.light
+                                .icon.dark
+            .nav-wrapper.section
                 nav
                     ul
                         li
@@ -29,21 +28,22 @@ html(lang="ko", data-theme="light", class="preload")
                         each page in dirs["__DIRECTORY__"]
                             li
                                 a(href=page.permalink) #{ page.title }
-            hr
-            .section
+            .main-wrapper.section
                 main
                     // content goes here
-            hr
-            .section
+            .footer-wrapper.section
                 footer
                     .footer-msg
-                        div Designed by EHZIL,
                         div
-                            | Built with
-                            span.deno
+                            | Designed by 
+                            span.icon.ehzil
+                            | EHZIL,
+                        div
+                            | Built with 
+                            span.icon.deno
                             | Deno,
                         div
-                            | Powered by
-                            span.github
+                            | Deployed on 
+                            span.icon.github
                             | Github.
         script(src="/global.js", type="module")
