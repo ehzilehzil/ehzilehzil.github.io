@@ -89,7 +89,7 @@ const renderPage = (srcFile, vars) => {
 {
     console.log(`./_markdown/page 파일들 렌더링 시작`);
 
-    let mdFiles = fg.globSync(`./_markdown/page/**/*.md`);
+    let mdFiles = fg.globSync(`./_markdown/page/**/*.md`).sort();
     for (let [i, mdf] of mdFiles.entries()) {
         let {dir, name} = path.parse(mdf);
         dir = dir.replace(`./_markdown/page`, ``).replace(/^\//, ``).replace(/^$/, `/`);
@@ -133,7 +133,7 @@ for (let [permalink, {path, title, dir, updated, tags}] of Object.entries(pages)
 {
     console.log(`./_markdown/dir 파일들 렌더링 시작`);
 
-    let mdFiles = fg.globSync(`./_markdown/dir/**/*.md`);
+    let mdFiles = fg.globSync(`./_markdown/dir/**/*.md`).sort();
     for (let [i, mdf] of mdFiles.entries()) {
         let {name} = path.parse(mdf);
         let dir = `__DIRECTORY__`;
