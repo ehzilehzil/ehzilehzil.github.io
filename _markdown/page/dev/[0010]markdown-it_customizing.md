@@ -51,9 +51,35 @@ const md = markdownIt({
 }).use(/** plugin */);
 ```
 
-markdown 에서 왼쪽 아래처럼 사용하면, 오른쪽 아래처럼 결과가 나옴
+markdown 에서 아래처럼 사용하면...
 
-*TBD 그림추가*
+~~~markdown
+```javascript{-1,+2,5}
+console.log(`hello world`);
+console.log(`HELLO WORLD`);
+
+for (let [i, x] of primes.entries()) {
+    if (i >= 10) break;
+
+    console.log(x);
+}
+```
+~~~
+
+아래처럼 결과가 나옴
+
+```javascript{-1,+2,5}
+console.log(`hello world`);
+console.log(`HELLO WORLD`);
+
+for (let [i, x] of primes.entries()) {
+    if (i >= 10) break;
+
+    console.log(x);
+}
+```
+
+{ 기호와 } 사이에 라인 하이라이트가 필요한 행을 넣으면 됨, 단 공백을 넣으면 안됨
 
 ## 커스텀 컨테이너 추가
 

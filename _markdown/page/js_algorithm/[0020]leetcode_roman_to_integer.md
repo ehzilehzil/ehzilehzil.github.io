@@ -1,7 +1,7 @@
 ---
 layout: "page"
 title: "13. Roman to Integer"
-description: "러스트로 리트코드 문제 풀이"
+description: "자바스크립트로 리트코드 문제 풀이"
 updated: "2025-03-03"
 tags: ["leetcode","easy","hash_table","math","string"]
 ---
@@ -22,32 +22,30 @@ I, V, X, L, C, D, M 은 각각 1, 5, 10, 50, 100, 500, 1000 에 해당
 
 단, `IV` 의 경우 4 를 나타내는데, 각 문자를 치환하여 합산하면 6 이 됨, 이를 방지하기 위해 `IV` 및 이와 유사한 숫자를 `IIII` 와 같이 먼저 풀어놓음
 
-```rust
-impl Solution {
-    pub fn roman_to_int(s: String) -> i32 {
-        let s = s.replace("IV", "IIII")
-                 .replace("IX", "VIIII")
-                 .replace("XL", "XXXX")
-                 .replace("XC", "LXXXX")
-                 .replace("CD", "CCCC")
-                 .replace("CM", "DCCCC");
-        return s.chars().fold(0, |a, x| {
-            return a + match x {
-                'I' => 1,
-                'V' => 5,
-                'X' => 10,
-                'L' => 50,
-                'C' => 100,
-                'D' => 500,
-                'M' => 1_000,
-                _ => 0,
-            };
-        });
-    }
-}
+```javascript
+let romanToInt = (s) => {
+    s = s.replace("IV", "IIII")
+         .replace("IX", "VIIII")
+         .replace("XL", "XXXX")
+         .replace("XC", "LXXXX")
+         .replace("CD", "CCCC")
+         .replace("CM", "DCCCC");
+    return s.split("").reduce((a, x) => {
+        switch (x) {
+            case "I": a += 1; break;
+            case "V": a += 5; break;
+            case "X": a += 10; break;
+            case "L": a += 50; break;
+            case "C": a += 100; break;
+            case "D": a += 500; break;
+            case "M": a += 1_000; break;
+        }
+        return a;
+    }, 0);
+};
 ```
 
-치환했을 때 합산결과가 잘못될 수 있는 케이스들을 replace 함수로 변환해 두고, fold 함수로 각각에 대응하는 숫자로 바꿔 합산을 함
+치환했을 때 합산결과가 잘못될 수 있는 케이스들을 replace 함수로 변환해 두고, reduce 함수에서 각각에 대응하는 숫자로 바꿔 합산을 함
 
 ## 치환하지 않고 계산
 
@@ -57,54 +55,48 @@ impl Solution {
 
 로마숫자를 뒤에서부터 합산해나갈 때, 만일 `I` 가 등장했고, 이 때까지의 합산 결과가 5 에 해당하는 `V` 이상이라면 이 때는 마이너스(-)를 해줘야 한다고 보면 됨
 
-```rust
-impl Solution {
-    pub fn roman_to_int(s: String) -> i32 {
-        return s.chars().rfold(0, |a, x| {
-            return a + match x {
-                'I' => if a < 5 { 1 } else { -1 },
-                'V' => 5,
-                'X' => if a < 50 { 10 } else { -10 },
-                'L' => 50,
-                'C' => if a < 500 { 100 } else { -100 },
-                'D' => 500,
-                'M' => 1_000,
-                _ => 0,
-            };
-        });
-    }
-}
+```javascript
+let romanToInt = (s) => {
+    return s.split("").reduceRight((a, x) => {
+        switch (x) {
+            case "I": a += (a < 5) ? 1 : -1; break;
+            case "V": a += 5; break;
+            case "X": a += (a < 50) ? 10 : -10; break;
+            case "L": a += 50; break;
+            case "C": a += (a < 500) ? 100 : -100; break;
+            case "D": a += 500; break;
+            case "M": a += 1_000; break;
+        }
+        return a;
+    }, 0);
+};
 ```
 
-뒤에서부터 합산을 위해 rfold 함수를 사용, 마이너스로 사용될 수 있는 로마숫자들에 대해서는 조건식을 통해 플러스(+)인지 마이너스(-)인지를 판단하도록 함
+뒤에서부터 합산을 위해 reduceRight 함수를 사용, 마이너스로 사용될 수 있는 로마숫자들에 대해서는 조건식을 통해 플러스(+)인지 마이너스(-)인지를 판단하도록 함
 
 ## 치환하지 않고 계산 2
 
 뒤에서부터 합산을 하되, 로마숫자 각각의 치환 결과를 일단 모아두고 마지막에 한번에 합산
 
-```rust
-use std::collections::HashMap;
+```javascript
+let romanToInt = (s) => {
+    let h = new Map([
+        ["I", 1], ["V", 5], ["X", 10], ["L", 50], ["C", 100], ["D", 500], ["M", 1_000]
+    ]);
+    let r = [];
 
-impl Solution {
-    pub fn roman_to_int(s: String) -> i32 {
-        let h = HashMap::from([
-            ('I', 1), ('V', 5), ('X', 10), ('L', 50), ('C', 100), ('D', 500), ('M', 1_000)
-        ]);
-        let mut v = vec![];
-
-        for x in s.chars().rev() {
-            let a = h.get(&x).unwrap_or(&0);
-            let b = v.last().unwrap_or(&0);
-            v.push(if a < b { -(*a) } else { *a });
-        }
-
-        return v.iter().sum::<i32>();
+    for (let x of s.split("").reverse()) {
+        let a = h.get(x);
+        a = (r.length && a < r.at(-1)) ? -a : a;
+        r.push(a);
     }
-}
+
+    return r.reduce((a, x) => a + x);
+};
 ```
 
-match 분기 대신 HashMap 사용하여 치환
+숫자로 치환할 때 switch 분기 대신 Map 객체 사용
 
-로마숫자 s 를 뒤에서부터 순회, 숫자료 치환하고, 플러스(+) 또는 마이너스(-) 결과를 v Vecctor 에 삽입
+로마숫자 s 를 뒤에서부터 순회, 숫자료 치환하고, 플러스(+) 또는 마이너스(-) 결과를 r 배열에 삽입
 
-마지막에 v 각 요소의 합계를 리턴
+마지막에 r 각 요소 합계를 리턴
