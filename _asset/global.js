@@ -2,6 +2,7 @@
 
 const $html = document.documentElement;
 const $main = document.querySelector(`main`);
+const $toggleTheme = document.querySelector(`.toggle-theme`);
 
 // 페이지 오픈 직후, 자동 애니메이션/트랜지션 방지
 window.onload = () => {
@@ -44,4 +45,14 @@ document.body.onclick = async (e) => {
             fetch_content();
         }
     }
+};
+
+// 페이지 오픈 직후, 테마적용
+let curTheme = window.sessionStorage.getItem("theme") || (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+$html.dataset.theme = curTheme;
+
+// 테마토글 클릭
+$toggleTheme.onclick = (e) => {
+    $html.dataset.theme = $html.dataset.theme === "dark" ? "light" : "dark";
+    window.sessionStorage.setItem("theme", $html.dataset.theme);
 };

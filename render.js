@@ -29,7 +29,7 @@ const md = markdownIt({
                            `</div>`;
         }
 
-        return `<pre><code class="hljs language-${language}">` +
+        return `<pre class=${language}><code class="hljs language-${language}">` +
                codelines.join("\n") +
                `</code></pre>`
     },
