@@ -24,6 +24,7 @@ const md = markdownIt({
             if (linesinfo.has(`-${i+1}`)) t = " -";
             if (linesinfo.has(`${i+1}`)) t = " =";
 
+            if (codelines[i] === ``) codelines[i] = `\n`;
             codelines[i] = `<div class="line${t}">` +
                            codelines[i] +
                            `</div>`;
