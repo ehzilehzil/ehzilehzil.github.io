@@ -94,6 +94,8 @@
 
 * {
     box-sizing: border-box;
+    font-variant-ligatures: none !important;
+    font-feature-settings: "liga" 0 !important;
 }
 
 html, body, div, header, nav, main, article, section, aside, footer {
