@@ -1,8 +1,9 @@
 @import url("https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css");
 // @import url("https://cdn.jsdelivr.net/npm/d2coding@1.3.2/d2coding-full.min.css");
 // modified font-display: swap --> block
-@font-face{font-family:D2Coding;font-style:normal;font-weight:700;font-display:block;src:local('D2Coding Bold'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.ttf') format('truetype')}@font-face{font-family:D2Coding;font-style:normal;font-weight:400;font-display:swap;src:local('D2Coding Regular'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.ttf') format('truetype')}
+// @font-face{font-family:D2Coding;font-style:normal;font-weight:700;font-display:block;src:local('D2Coding Bold'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-bold-full.ttf') format('truetype')}@font-face{font-family:D2Coding;font-style:normal;font-weight:400;font-display:swap;src:local('D2Coding Regular'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/d2coding@1.3.2/fonts/d2coding-full.ttf') format('truetype')}
 // modified
+@import url("https://statics.goorm.io/fonts/GoormSansCode/v1.0.1/GoormSansCode.min.css");
 
 // globals
 @mixin icon {
@@ -154,11 +155,15 @@ hr {
     margin: 0; padding: 0; height: 0; border-color: var(--bg-2);
 }
 
+pre {
+    font: 400 16px "Goorm Sans Code",monospace;
+}
+
 
 // layouts
 body {
     position: fixed; top: 0; right: 0; bottom: 0; left: 0;
-    font: 400 16px D2Coding,monospace; line-height: 1.3; color: var(--fg-1); background: var(--bg-1);
+    font: 400 16px "Goorm Sans Code",monospace; line-height: 1.3; color: var(--fg-1); background: var(--bg-1);
     overflow: hidden;
     
     .layout {
