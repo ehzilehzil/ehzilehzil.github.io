@@ -1,8 +1,8 @@
 {
+    "editor.fontFamily": "D2Coding, Consolas, 'Courier New', monospace",
     "deno.enable": true,
     "typescript.suggest.autoImports": false,
     "workbench.colorTheme": "Default Dark Modern",
     "liveServer.settings.root": "/_site",
-    "liveServer.settings.file": "404.html",
-    "liveServer.settings.CustomBrowser": "whale"
+    "liveServer.settings.file": "404.html"
 }

@@ -1,0 +1,17 @@
+{
+    "lint": {
+        "rules": {
+            "exclude": ["prefer-const"]
+        }
+    },
+    "imports": {
+        "@types/fs-extra": "npm:@types/fs-extra@^11.0.4",
+        "@types/markdown-it": "npm:@types/markdown-it@^14.1.2",
+        "@types/pug": "npm:@types/pug@^2.0.10",
+        "fs-extra": "npm:fs-extra@^11.3.0",
+        "gray-matter": "npm:gray-matter@^4.0.3",
+        "highlight.js": "npm:highlight.js@^11.11.1",
+        "markdown-it": "npm:markdown-it@^14.1.0",
+        "pug": "npm:pug@^3.0.3"
+    }
+}
