@@ -8,6 +8,7 @@
         "@types/fs-extra": "npm:@types/fs-extra@^11.0.4",
         "@types/markdown-it": "npm:@types/markdown-it@^14.1.2",
         "@types/pug": "npm:@types/pug@^2.0.10",
+        "fast-glob": "npm:fast-glob@^3.3.3",
         "fs-extra": "npm:fs-extra@^11.3.0",
         "gray-matter": "npm:gray-matter@^4.0.3",
         "highlight.js": "npm:highlight.js@^11.11.1",

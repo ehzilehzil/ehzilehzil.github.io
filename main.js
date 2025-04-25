@@ -1,18 +1,23 @@
 // @ts-check
 
 import fs from "fs-extra";
+import fg from "fast-glob";
 import * as $ from "./utils.js";
+
+
+/**
+ * 페이지(포스팅)에 해당하는 마크다운 파싱 후 임시저장
+ */
+{
+    let mdFiles = 
+}
+
 
 /**
  * 테스트
  * @type {() => void}
  */
 let test = () => {
-    let a = fs.readFileSync(`./_markdown/page/_test/[0010]my_test.md`, {encoding: `utf-8`});
-    let {data, content} = $.parse.separate(a);
-    content = $.parse.md(content);
-
-    console.log(content);
+    let mdFiles = fg.globSync(`./_markdown/**/*.md`).sort();
+    console.log(mdFiles);
 };
-
-test();
