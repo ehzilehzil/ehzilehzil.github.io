@@ -12,8 +12,11 @@ mise use node@24
 
 gh-pages 로 브랜치 변경
 
-copilot 도움받아서 진행
+## next.js 설치
 
 npx create-next-app@latest tmp
 
 tmp 안에 있는 내용을 모두 상위 디렉토리로 이동
+
+npm run dev
+
